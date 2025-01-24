@@ -1,13 +1,5 @@
-# Getting Started
-
-## Dynatrace Environment
-
-You must have access to a Dynatrace SaaS environment. [Sign up here](https://dt-url.net/trial){target="_blank"}
-
-Save the Dynatrace environment ID and environment
-
-* The ID is the first portion of the URL. (eg. `acb12345` from `https://abc12345.live.dynatrace.com`)
-* Your environment is probably `live` but could also be `sprint` or `dev`
+--8<-- "snippets/live-code-snippets.md"
+--8<-- "snippets/tenant-id.md"
 
 ## Create API Token
 
@@ -44,9 +36,7 @@ Click this button to open the demo environment. This will open in a new tab.
     In the repository dropdown
     be sure to use `yourUsername/demo-crossplane`
 
-!!! tip "Price"
-    GitHub includes a generous free tier.
-    If you follow the [cleanup](cleanup.md){target=_blank} instructions to delete your codespace once done, you will not be charged.
+--8<-- "snippets/price-tip.md"
 
 * Select your repository from the repository dropdown box.
 * Fill in the form with the details you've already gathered.
