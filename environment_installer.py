@@ -19,7 +19,7 @@ DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_e
 logger.info("Creating new cluster")
 run_command(["kind", "create", "cluster", "--config", ".devcontainer/kind-cluster.yaml", "--wait", STANDARD_TIMEOUT])
 run_command(["kubectl", "create", "namespace", "crossplane-system"])
-run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}" f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
+run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
 
 # Install Crossplane
 run_command(["helm", "repo", "add", "crossplane-stable", "https://charts.crossplane.io/stable"])
