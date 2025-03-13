@@ -11,6 +11,12 @@ MONACO_VERSION="v2.15.2"
 JMETER_VERSION="5.6.3"
 RUNME_CLI_VERSION = "3.10.2"
 
+# Install RunMe
+run_command(["mkdir", "runme_binary"])
+run_command(["wget", "-O", "runme_binary/runme_linux_x86_64.tar.gz", f"https://download.stateful.com/runme/{RUNME_CLI_VERSION}/runme_linux_x86_64.tar.gz"])
+run_command(["tar", "-xvf", "runme_binary/runme_linux_x86_64.tar.gz", "--directory", "runme_binary"])
+run_command(["sudo", "mv", "runme_binary/runme", "/usr/local/bin"])
+run_command(["rm", "-rf", "runme_binary"])
 
 # Build DT environment URLs
 DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_env_type=DT_ENVIRONMENT_TYPE)
