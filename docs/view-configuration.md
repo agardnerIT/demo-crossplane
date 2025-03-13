@@ -30,7 +30,7 @@ description = "this is an autotag rule created by crossplane ABC123"
 
 * Save that configuration back to your Git repository:
 
-``` { "name": "git add terraform"}
+``` { "name": "git add terraform" }
 git add config_as_code/main.tf
 git commit -m "update auto-tag rule"
 git push
