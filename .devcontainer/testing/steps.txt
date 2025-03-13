@@ -1,3 +1,4 @@
+wait for crossplane to sync
 test_dynatrace_ui_tag_exists.py
 change tag description
 wait for crossplane to sync
