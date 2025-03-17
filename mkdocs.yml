@@ -7,6 +7,7 @@ nav:
     - '2. Getting Started': getting-started.md
     - '3. Installation Explained': installation-explained.md
     - '4. View Configuration in Dynatrace': view-configuration.md
+    - '5. Delete Tag in Dynatrace': delete-tag.md
   
   # - 'Crossplane Observability':
   #   - '1. Overview': observability/index.md
