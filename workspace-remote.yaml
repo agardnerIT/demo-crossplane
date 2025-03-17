@@ -2,6 +2,8 @@ apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
   name: exampleworkspace
+  annotations:
+    crossplane.io/external-name: crossplane-created
 spec:
   forProvider:
     source: Remote
