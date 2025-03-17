@@ -45,5 +45,5 @@ Open the auto-tag rule and you should see the changes reflected.
 ![auto tag changed](images/dt-auto-tag-changed.png)
 
 <div class="grid cards" markdown>
-- [Click Here to Continue :octicons-arrow-right-24:](observability/index.md)
+- [Click Here to Continue :octicons-arrow-right-24:](delete-tag.md)
 </div>
