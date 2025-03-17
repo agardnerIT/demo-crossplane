@@ -1,8 +1,6 @@
 import os
 from utils import *
 
-# TODO
-
 CODESPACE_NAME = os.environ.get("CODESPACE_NAME", "")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 REPOSITORY_NAME = os.environ.get("RepositoryName", "")
