@@ -2,13 +2,12 @@ apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
   name: exampleworkspace
-  annotations:
-    crossplane.io/external-name: crossplane-created
 spec:
   forProvider:
     source: Remote
     module: git::https://github.com/GITHUB_REPOSITORY_PLACEHOLDER?ref=main
     entrypoint: config_as_code
+  deletionPolicy: Delete
   # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: default
