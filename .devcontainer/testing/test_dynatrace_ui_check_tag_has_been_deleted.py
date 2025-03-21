@@ -49,4 +49,12 @@ def test_dynatrace_ui(page: Page):
     tag_name = "crossplane-created"
 
     # Expect tag NOT to exist
-    expect(app_frame_locator.locator(f"dtx-markdown[uitestid=\"cell-summary\"] div.content:has-text(\"{tag_name}\")")).not_to_have_text(tag_name, timeout=WAIT_TIMEOUT)
+    # Quite honestly, I have no idea why this first line
+    # is necessary, but 4 days into this and this is the only reliable way I can find to make this work.
+    # I can't waste any more time on this, so this will do
+    try:
+        page.locator("[data-testid=\"cluster-wrapper-app-iframe\"]").content_frame.get_by_text(tag_name, exact=True).wait_for(timeout=WAIT_TIMEOUT)
+    except Exception as te:
+        logger.info(f"Tried waiting for {tag_name} and couldn't find it (this is a good thing)")
+
+    expect(page.locator("[data-testid=\"cluster-wrapper-app-iframe\"]").content_frame.get_by_text(tag_name, exact=True)).not_to_be_visible(timeout=WAIT_TIMEOUT)
