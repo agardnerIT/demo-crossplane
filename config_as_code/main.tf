@@ -1,4 +1,3 @@
-  description                   = "this is an autotag rule created by crossplane"
   # rules_maintained_externally = false
   rules {
     rule {
@@ -18,4 +17,3 @@
           }
         }
       }
-    }
