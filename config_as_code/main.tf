@@ -1,4 +1,3 @@
-  # rules_maintained_externally = false
   rules {
     rule {
       type                = "ME"
@@ -16,4 +15,3 @@
             string_value   = "crossplane"
           }
         }
-      }
