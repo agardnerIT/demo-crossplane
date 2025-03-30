@@ -24,7 +24,6 @@ logger.info("Creating new cluster")
 run_command(["kind", "create", "cluster", "--config", ".devcontainer/kind-cluster.yaml", "--wait", STANDARD_TIMEOUT])
 run_command(["kubectl", "create", "namespace", "crossplane-system"])
 
-
 # replace placeholder with actual repo
 do_file_replace(pattern="workspace-remote.yaml", find_string="GITHUB_REPOSITORY_PLACEHOLDER", replace_string=GITHUB_REPOSITORY)
 
