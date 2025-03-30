@@ -23,18 +23,6 @@ DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_e
 logger.info("Creating new cluster")
 run_command(["kind", "create", "cluster", "--config", ".devcontainer/kind-cluster.yaml", "--wait", STANDARD_TIMEOUT])
 run_command(["kubectl", "create", "namespace", "crossplane-system"])
-run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
-
-# Install Crossplane
-run_command(["helm", "repo", "add", "crossplane-stable", "https://charts.crossplane.io/stable"])
-run_command(["helm", "repo", "update"])
-run_command(["helm", "install", "crossplane", "--namespace", "crossplane-system", "--wait", "crossplane-stable/crossplane", "--values", "crossplane-values.yaml"])
-
-run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
-run_command(["sleep", "5"]) # small sleep while objects are created in k8s
-run_command(["kubectl", "-n", "crossplane-system", "wait", "pod", "--for", "condition=Ready", "-l", "pkg.crossplane.io/provider=provider-terraform"])
-run_command(["kubectl", "-n", "crossplane-system", "wait", "--for", "condition=established", "--timeout=60s", "crd/providerconfigs.tf.upbound.io"])
-run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
 
 
 # replace placeholder with actual repo
@@ -63,4 +51,16 @@ if CODESPACE_NAME.startswith("dttest-"):
     # Testing finished. Destroy the codespace
     run_command(["gh", "codespace", "delete", "--codespace", CODESPACE_NAME, "--force"])
 else:
+    run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
+    # Install Crossplane
+    run_command(["helm", "repo", "add", "crossplane-stable", "https://charts.crossplane.io/stable"])
+    run_command(["helm", "repo", "update"])
+    run_command(["helm", "install", "crossplane", "--namespace", "crossplane-system", "--wait", "crossplane-stable/crossplane", "--values", "crossplane-values.yaml"])
+    
+    run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
+    run_command(["sleep", "5"]) # small sleep while objects are created in k8s
+    run_command(["kubectl", "-n", "crossplane-system", "wait", "pod", "--for", "condition=Ready", "-l", "pkg.crossplane.io/provider=provider-terraform"])
+    run_command(["kubectl", "-n", "crossplane-system", "wait", "--for", "condition=established", "--timeout=60s", "crd/providerconfigs.tf.upbound.io"])
+    run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
+
     send_startup_ping(demo_name="demo-crossplane")
