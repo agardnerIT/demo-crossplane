@@ -1,4 +1,3 @@
-  rules {
     rule {
       type                = "ME"
       enabled             = true
@@ -14,4 +13,3 @@
             operator       = "EQUALS"
             string_value   = "crossplane"
           }
-        }
