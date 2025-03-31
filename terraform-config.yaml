@@ -44,6 +44,6 @@ spec:
               # also poll for changes more quickly (every 30s)
               args:
                 - -d
-                - --poll-interval=30s
+                - --poll=30s
                 - --sync-interval=30s
                 - --max-reconcile-rate=10
