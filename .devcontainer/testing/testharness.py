@@ -1,7 +1,6 @@
 import subprocess
 import os, threading
 from helpers import *
-from ../../utils import *
 
 DT_API_TOKEN_TESTING = os.getenv("DT_API_TOKEN_TESTING","")
 
