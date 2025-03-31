@@ -1,3 +1,4 @@
+/*
       enabled             = true
       value_normalization = "Leave text as-is"
       attribute_rule {
@@ -9,3 +10,4 @@
             case_sensitive = true
             key            = "HOST_GROUP_NAME"
             operator       = "EQUALS"
+*/
