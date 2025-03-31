@@ -64,7 +64,7 @@ for step in steps:
 
         if output.returncode != 0 and DEV_MODE == "FALSE":
             logger.error(f"Must create an issue: {step} {output}")
-            create_github_issue(output, step_name=step)
+            #create_github_issue(output, step_name=step)
         else:
             print(output)
     else:
@@ -72,6 +72,6 @@ for step in steps:
         print(f"[{step}] | {output.returncode} | {output.stdout}")
         if output.returncode != 0 and DEV_MODE == "FALSE":
             logger.error(f"Must create an issue: {step} {output}")
-            create_github_issue(output, step_name=step)
+            #create_github_issue(output, step_name=step)
         else:
             print(output)
