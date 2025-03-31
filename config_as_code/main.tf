@@ -1,4 +1,3 @@
-    rule {
       type                = "ME"
       enabled             = true
       value_normalization = "Leave text as-is"
@@ -12,4 +11,3 @@
             key            = "HOST_GROUP_NAME"
             operator       = "EQUALS"
             string_value   = "crossplane"
-          }
