@@ -27,9 +27,6 @@ run_command(["kubectl", "create", "namespace", "crossplane-system"])
 # replace placeholder with actual repo
 do_file_replace(pattern="workspace-remote.yaml", find_string="GITHUB_REPOSITORY_PLACEHOLDER", replace_string=GITHUB_REPOSITORY)
 
-# Create workspace (this tells crossplane to start monitoring this Git repo)
-run_command(["kubectl", "apply", "-f", "workspace-remote.yaml"])
-
 
 if CODESPACE_NAME.startswith("dttest-"):
     # Set default repository for gh CLI
@@ -51,10 +48,14 @@ if CODESPACE_NAME.startswith("dttest-"):
     run_command(["gh", "codespace", "delete", "--codespace", CODESPACE_NAME, "--force"])
 else:
     run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
+    
     # Install Crossplane
     run_command(["helm", "repo", "add", "crossplane-stable", "https://charts.crossplane.io/stable"])
     run_command(["helm", "repo", "update"])
     run_command(["helm", "install", "crossplane", "--namespace", "crossplane-system", "--wait", "crossplane-stable/crossplane", "--values", "crossplane-values.yaml"])
+
+    # Create workspace (this tells crossplane to start monitoring this Git repo)
+    run_command(["kubectl", "apply", "-f", "workspace-remote.yaml"])
     
     run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
     run_command(["sleep", "5"]) # small sleep while objects are created in k8s
