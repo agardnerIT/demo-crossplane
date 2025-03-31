@@ -12,7 +12,7 @@ DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_e
 DT_API_TOKEN_TO_USE = create_dt_api_token(token_name="[devrel e2e testing] DT_CROSSPLANE_E2E_TEST_TOKEN", scopes=["settings.read", "settings.write", "metrics.ingest"], dt_rw_api_token=DT_API_TOKEN_TESTING, dt_tenant_live=DT_TENANT_LIVE)
 store_env_var(key="DT_API_TOKEN", value=DT_API_TOKEN_TO_USE)
 
-run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
+run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN_TO_USE}"])
 
 # Install Crossplane
 run_command(["helm", "install", "crossplane", "--namespace", "crossplane-system", "--wait", "crossplane-stable/crossplane", "--values", "crossplane-values.yaml"])
