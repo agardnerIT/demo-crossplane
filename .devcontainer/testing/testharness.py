@@ -15,6 +15,20 @@ store_env_var(key="DT_API_TOKEN", value=DT_API_TOKEN_TO_USE)
 
 run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
 
+# Install Crossplane
+run_command(["helm", "repo", "add", "crossplane-stable", "https://charts.crossplane.io/stable"])
+run_command(["helm", "repo", "update"])
+run_command(["helm", "install", "crossplane", "--namespace", "crossplane-system", "--wait", "crossplane-stable/crossplane", "--values", "crossplane-values.yaml"])
+
+# Create workspace (this tells crossplane to start monitoring this Git repo)
+run_command(["kubectl", "apply", "-f", "workspace-remote.yaml"])
+
+run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
+run_command(["sleep", "5"]) # small sleep while objects are created in k8s
+run_command(["kubectl", "-n", "crossplane-system", "wait", "pod", "--for", "condition=Ready", "-l", "pkg.crossplane.io/provider=provider-terraform"])
+run_command(["kubectl", "-n", "crossplane-system", "wait", "--for", "condition=established", "--timeout=60s", "crd/providerconfigs.tf.upbound.io"])
+run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
+
 steps = get_steps(f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing/steps.txt")
 INSTALL_PLAYWRIGHT_BROWSERS = False
 
