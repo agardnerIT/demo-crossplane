@@ -45,5 +45,4 @@ spec:
               args:
                 - -d
                 - --poll=30s
-                - --sync-interval=30s
                 - --max-reconcile-rate=10
