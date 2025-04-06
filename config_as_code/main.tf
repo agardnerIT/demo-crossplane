@@ -1,4 +1,5 @@
-  # rules_maintained_externally = false
+/*
+# rules_maintained_externally = false
   rules {
     rule {
       type                = "ME"
@@ -17,3 +18,4 @@
           }
         }
       }
+*/
