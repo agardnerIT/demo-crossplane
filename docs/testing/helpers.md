@@ -17,10 +17,13 @@ git push
 ```
 
 ```py { "name": "toggle terraform code" }
+import os
+folder_name = os.environ.get("RepositoryName", "")
+
 lines = []
 
 # Open file to read existing content
-with open("/workspaces/$RepositoryName/config_as_code/main.tf", mode="r") as terraform_file:
+with open(f"/workspaces/{folder_name}/config_as_code/main.tf", mode="r") as terraform_file:
     lines = terraform_file.readlines()
     number_of_lines = len(lines)
     first_line_stripped = lines[0].strip()
@@ -36,7 +39,7 @@ with open("/workspaces/$RepositoryName/config_as_code/main.tf", mode="r") as ter
         lines.pop(0)
 
 # Re-open file to write new lines
-with open("/workspaces/$RepositoryName/config_as_code/main.tf", mode="w") as terraform_file:    
+with open(f"/workspaces/{folder_name}/config_as_code/main.tf", mode="w") as terraform_file:    
     terraform_file.writelines(lines)
 ```
 
