@@ -48,7 +48,7 @@ if CODESPACE_NAME.startswith("dttest-"):
     run_command(["python3",  f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing/testharness.py"])
 
     # Testing finished. Destroy the codespace
-    #run_command(["gh", "codespace", "delete", "--codespace", CODESPACE_NAME, "--force"])
+    run_command(["gh", "codespace", "delete", "--codespace", CODESPACE_NAME, "--force"])
 else:
     run_command(["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_TENANT_LIVE}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
     
