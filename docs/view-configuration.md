@@ -46,4 +46,8 @@ Open the auto-tag rule and you should see the changes reflected.
 
 <div class="grid cards" markdown>
 - [Click Here to Continue :octicons-arrow-right-24:](delete-tag.md)
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> fe1c51b9ddfd3528f3f9194482ef4eb42fde30a7

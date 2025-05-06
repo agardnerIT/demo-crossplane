@@ -1,1 +1,7 @@
 site/*
+
+*__pycache__*
+
+# Ignore private notes
+notes.md
+notes.txt

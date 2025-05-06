@@ -1,7 +1,10 @@
 ## Delete Tag
 
+<<<<<<< HEAD
 --8<-- "snippets/bizevent-delete-tag.js"
 
+=======
+>>>>>>> fe1c51b9ddfd3528f3f9194482ef4eb42fde30a7
 Now imagine you want to delete the tag in Dynatrace.
 
 Remember that Crossplane is managing `config_as_code/main.tf` so let's comment out that out and save it back to Git.
@@ -38,4 +41,8 @@ The auto tag should no longer exist in your Dynatrace environment.
 
 <div class="grid cards" markdown>
 - [Click Here to Continue :octicons-arrow-right-24:](whats-next.md)
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> fe1c51b9ddfd3528f3f9194482ef4eb42fde30a7
