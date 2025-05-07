@@ -6,7 +6,7 @@ git push
 ```
 
 ```{ "name": "wait for crossplane to sync" }
-sleep 90
+sleep 120
 ```
 
 ```{ "name": "reset tag description" }
