@@ -6,7 +6,6 @@ GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 REPOSITORY_NAME = os.environ.get("RepositoryName", "")
 
 MONACO_VERSION="v2.15.2"
-JMETER_VERSION="5.6.3"
 RUNME_CLI_VERSION = "3.13.2"
 
 # Install RunMe
