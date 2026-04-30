@@ -13,55 +13,28 @@ from utils import *
 # See here for a devcontainer feature template: https://github.com/devcontainers/feature-starter
 
 # This logic essentially runs `kind create cluster`
-#createKubernetesCluster()
-#createNamespace(name="crossplane-system")
-#run_command(args=["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_URL}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
+createKubernetesCluster()
+createNamespace(name="crossplane-system")
+run_command(args=["kubectl", "-n", "crossplane-system", "create", "secret", "generic", "dt-details", f"--from-literal=DYNATRACE_ENV_URL={DT_URL}", f"--from-literal=DYNATRACE_API_TOKEN={DT_API_TOKEN}"])
 
 
-#helm install crossplane --namespace crossplane-system --wait crossplane-stable/crossplane --values crossplane-values.yaml
-
-#addHelmChart(name="crossplane-stable", url="https://charts.crossplane.io/stable", update=True)
-#helmInstall(name="crossplane", url="crossplane-stable/crossplane", namespace="crossplane-system", values_file="crossplane-values.yaml")
-#run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
-#time.sleep(5) # small sleep while objects are created in k8s
+addHelmChart(name="crossplane-stable", url="https://charts.crossplane.io/stable", update=True)
+helmInstall(name="crossplane", url="crossplane-stable/crossplane", namespace="crossplane-system", values_file="crossplane-values.yaml")
+run_command(["kubectl", "apply", "-f", "terraform-config.yaml"])
+time.sleep(5) # small sleep while objects are created in k8s
 
 # Wait for pods and crossplane to be ready
-#run_command(["kubectl", "-n", "crossplane-system", "wait", "--for=condition=Ready", "--all", "--timeout", "300s", "pod"])
-#run_command(["kubectl", "-n", "crossplane-system", "wait", "--for=condition=established", "--timeout=60s", "crd/providerconfigs.tf.upbound.io"])
-#run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
+run_command(["kubectl", "-n", "crossplane-system", "wait", "--for=condition=Ready", "--all", "--timeout", "300s", "pod"])
+run_command(["kubectl", "-n", "crossplane-system", "wait", "--for=condition=established", "--timeout=60s", "crd/providerconfigs.tf.upbound.io"])
+run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
 
 # replace placeholder with actual repo
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY") # Set this to "you/yourRep" in .env eg. "agardnerIT/demo-crossplane"
 do_file_replace(pattern=f"{BASE_DIR}/workspace-remote.yaml", find_string="GITHUB_REPOSITORY_PLACEHOLDER", replace_string=GITHUB_REPOSITORY)
 
-#
 run_command(["kubectl", "apply", "-f", "terraform-provider-config.yaml"])
 # Create workspace (this tells crossplane to start monitoring this Git repo)
 run_command(["kubectl", "apply", "-f", f"{BASE_DIR}/workspace-remote.yaml"])
-
-
-#do_file_replace(pattern=f"{BASE_DIR}/dynatrace/dynakube.yaml", find_string="ENVIRONMENT_ID_PLACEHOLDER", replace_string=DT_ENVIRONMENT_ID)
-
-
-# kubectl -n dynatrace create secret generic unguard --from-literal=apiToken=$DT_API_TOKEN_OBSLAB_UNGUARD --from-literal=dataIngestToken=$DT_API_TOKEN_OBSLAB_UNGUARD
-#
-
-
-#helmInstall(name="dynatrace-operator", url="oci://public.ecr.aws/dynatrace/dynatrace-operator", namespace="dynatrace", values_file="values.yaml", atomic=True)
-
-
-#run_command(["kubectl", "-n", "dynatrace", "wait", "--for=condition=Ready", "--all", "--timeout", "300s", "pod"])
-
-
-
-
-#############################################################################
-# Install MariaDB (Unguard database)
-#run_command(["helm", "install", "unguard-mariadb", "bitnami/mariadb", "--version", "11.5.7", "--set", "primary.persistence.enabled=false", "--set", "image.repository=bitnamilegacy/mariadb", "--wait", "--namespace=unguard"])
-
-#############################################################################
-# Install Unguard
-#helmInstall(name="unguard", url="oci://ghcr.io/dynatrace-oss/unguard/chart/unguard", namespace="unguard")
 
 #################
 # Below is still a (re)-work in progress
